@@ -115,3 +115,25 @@ function fibonacci(min ,max) {
 
 }
 
+////----------Find fibonacci number which index-----////////
+function fib(index){
+    var a = 1;
+    
+    const fib=[]
+    while(true){
+        fib.push(a)
+        if (fib.length < 2) {
+            a+=a
+        }
+        else if (fib[index-1]===a){
+            break
+        }
+        else{
+            a=fib[fib.length-1]+fib[fib.length-2]
+        }
+       
+    }
+    return `${a},${fib}`
+}
+console.log(fib(12))
+
