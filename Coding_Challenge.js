@@ -119,26 +119,82 @@
 // console.log(fib(12));
 
 // iki array arasindaki farki biulma (find to differen element in two array)
-function arrayDiff(a, b) {
-  return a.filter((item) => !b.includes(item));
+// function arrayDiff(a, b) {
+//   return a.filter((item) => !b.includes(item));
+// }
+
+// //harflerin alfabedeki yerini bulma (find the position letter in alphabet)
+// const findPosition = (letter) =>
+//   `Position of alphabet: ${letter.toLowerCase().charCodeAt() - 96}`;
+
+// const text = "The suns232et sets at twelve o' clock.";
+
+// function alphabetPosition(text) {
+//   const [...punctuations] = "`~!@#$%^&*()_+{}|:\"<>?-=[];'./,' ',";
+//   const cleanUp = text.split("").filter((item) => !punctuations.includes(item));
+//   const position = cleanUp.map((item) => {
+//     return item.toLowerCase().charCodeAt() - 96;
+//   });
+//   return position
+//     .filter((item) => item > 0)
+//     .toString()
+//     .split(",")
+//     .join(" ");
+// }
+// console.log(alphabetPosition(text));
+
+// function alphabetPosition(text) {
+//   return text
+//     .toUpperCase()
+//     .match(/[a-z]/gi)
+//     .map((c) => c.charCodeAt() - 64)
+//     .join(" ");
+// }
+// function alphabetPosition(text) {
+//   return text
+//     .match(/[a-zA-Z]/g)
+//     .map((el) => el.toLowerCase().charCodeAt() - 96)
+//     .join(" ");
+// }
+console.log("hello world");
+
+const second = 3662;
+
+const minute = (second - (second % 60)) / 60;
+const hour = (minute - (minute % 60)) / 60;
+
+const readAble = `${hour} hour , ${minute % 60} minute ${second % 60} ,second `;
+function formatDuration(seconds) {
+  function numberEnd(num) {
+    return num > 1 ? "s" : "";
+  }
+  const minute = Math.floor(seconds / 60) % 60;
+  const hour = Math.floor(seconds / (60 * 60));
+
+  const h = hour > 0 ? `${hour} hour${numberEnd(hour)}` : "";
+  const m = minute > 0 ? `${minute} minute${numberEnd(minute)}` : "";
+  const s =
+    seconds % 60 > 0 ? `${seconds % 60} second${numberEnd(seconds % 60)}` : "";
+  if (h && m && s) {
+    return `${h} , ${m} and ${s}`;
+  }
+  if (h && m && !s) {
+    return `${h} and ${m}`;
+  }
+  if (!h && m && s) {
+    return `${m} and ${s}`;
+  }
+  if (h && !m && !s) {
+    return `${h}`;
+  }
+  if (!h && m && !s) {
+    return `${m}`;
+  }
+  if (!h && !m && s) {
+    return `${s}`;
+  }
 }
+console.log(formatDuration(120));
 
-//harflerin alfabedeki yerini bulma (find the position letter in alphabet)
-const findPosition = (letter) =>
-  `Position of alphabet: ${letter.toLowerCase().charCodeAt() - 96}`;
-
-const text = "The suns232et sets at twelve o' clock.";
-
-function alphabetPosition(text) {
-  const [...punctuations] = "`~!@#$%^&*()_+{}|:\"<>?-=[];'./,' ',";
-  const cleanUp = text.split("").filter((item) => !punctuations.includes(item));
-  const position = cleanUp.map((item) => {
-    return item.toLowerCase().charCodeAt() - 96;
-  });
-  return position
-    .filter((item) => item > 0)
-    .toString()
-    .split(",")
-    .join(" ");
-}
-console.log(alphabetPosition(text));
+("1 hour, 1 minute and 2 seconds");
+("1 minute and 2 seconds");
