@@ -169,32 +169,32 @@ function formatDuration(seconds) {
     return num > 1 ? "s" : "";
   }
   const minute = Math.floor(seconds / 60) % 60;
-  const hour = Math.floor(seconds / (60 * 60));
+  const hour = Math.floor(seconds / (60 * 60)) % 24;
+  const day = Math.floor(seconds / (60 * 60 * 24)) % 365;
+  const year = Math.floor(seconds / (60 * 60 * 24 * 365));
 
   const h = hour > 0 ? `${hour} hour${numberEnd(hour)}` : "";
+  const d = day > 0 ? `${day} day${numberEnd(day)}` : "";
+  const y = year > 0 ? `${year} year${numberEnd(year)}` : "";
   const m = minute > 0 ? `${minute} minute${numberEnd(minute)}` : "";
   const s =
     seconds % 60 > 0 ? `${seconds % 60} second${numberEnd(seconds % 60)}` : "";
-  if (h && m && s) {
-    return `${h} , ${m} and ${s}`;
-  }
-  if (h && m && !s) {
-    return `${h} and ${m}`;
-  }
-  if (!h && m && s) {
-    return `${m} and ${s}`;
-  }
-  if (h && !m && !s) {
-    return `${h}`;
-  }
-  if (!h && m && !s) {
-    return `${m}`;
-  }
-  if (!h && !m && s) {
-    return `${s}`;
-  }
+
+  return y + d + h + m + s;
 }
-console.log(formatDuration(120));
+console.log(formatDuration(3600));
 
 ("1 hour, 1 minute and 2 seconds");
 ("1 minute and 2 seconds");
+
+// function test(a) {
+//   var str =
+//     a.length == 1
+//       ? a[0]
+//       : a.slice(0, a.length - 1).join(", ") + " and " + a[a.length - 1];
+//   console.log("[" + a.join(", ") + "] => " + str);
+// }
+
+// test(["this"]);
+// test(["this", "that"]);
+// test(["this", "that", "the other"]);
